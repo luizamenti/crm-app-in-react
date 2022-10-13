@@ -1,4 +1,5 @@
 import React from "react";
+import { LinkContainer } from "react-router-bootstrap";
 
 import logo from "../../images/estrela.png";
 
@@ -15,11 +16,16 @@ export default function Header() {
           className="star-image-header my-3"
           alt="Logo de estrela amarela"
         />
-        <Navbar.Brand href="#home">CRM STARS</Navbar.Brand>
+        <LinkContainer to="/">
+          <Navbar.Brand>CRM STARS</Navbar.Brand>
+        </LinkContainer>
         <Nav className="me-auto">
-          <Nav.Link href="#home">Página inicial</Nav.Link>
-          <Nav.Link href="#features">Pedidos</Nav.Link>
-          <Nav.Link href="#pricing">Análise</Nav.Link>
+          <LinkContainer to="/">
+            <Nav.Link>Página inicial</Nav.Link>
+          </LinkContainer>
+          <LinkContainer to="/orders">
+            <Nav.Link>Pedidos</Nav.Link>
+          </LinkContainer>
         </Nav>
       </Container>
     </Navbar>
