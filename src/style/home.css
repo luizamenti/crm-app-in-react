@@ -1,0 +1,15 @@
+* {
+    box-sizing: border-box;
+}
+
+.star-image-logo {
+    width: 100px;
+}
+
+.login-container {
+    margin-top: 100px;
+}
+
+.form {
+    width: 300px;
+}
