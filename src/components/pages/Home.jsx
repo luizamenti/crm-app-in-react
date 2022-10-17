@@ -16,8 +16,8 @@ export default function Home() {
     // criar método post
     const options = {
       method: "POST",
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ email: userInput, password: passwordInput })
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: userInput, password: passwordInput }),
     };
 
     fetch("http://localhost:8080/users/login", options)
@@ -67,11 +67,11 @@ export default function Home() {
           <Form.Group className="from-group mb-3" controlId="formGroupPassword">
             <Form.Label>Senha</Form.Label>
             <Form.Control
-              type="password"
-              value={passwordInput}
-              onChange={(event) => {
-                setPasswordInput(event.target.value);
-              }}
+            // type="password"
+            // value={passwordInput}
+            //onChange={(event) => {
+            // setPasswordInput(event.target.value);
+            // }}
             />
           </Form.Group>
           <div className="d-flex justify-content-center">

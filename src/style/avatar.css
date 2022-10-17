@@ -1,0 +1,8 @@
+.image-users{ 
+  display: inline-block;
+  width: 10;
+  height: 200px;
+margin-left: 80vh;
+  border-radius: 50%;
+  object-fit: cover;
+}
