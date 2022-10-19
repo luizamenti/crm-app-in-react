@@ -1,5 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
 import logo from "../../images/estrela.png";
+
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
@@ -8,34 +11,31 @@ export default function Home() {
   const [userInput, setUserInput] = React.useState("");
   const [passwordInput, setPasswordInput] = React.useState("");
 
+  const navigate = useNavigate();
+
   const login = (event) => {
     event.preventDefault();
-    //testar envio do formulário
-    console.log("enviou");
 
     // criar método post
     const options = {
       method: "POST",
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ email: userInput, password: passwordInput })
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: userInput, password: passwordInput }),
     };
 
     fetch("http://localhost:8080/users/login", options)
       .then((response) => {
-        response.json();
+        response.json().then((data) => {
+          if (data.token) {
+            console.log(data);
+            localStorage.setItem("token", data.token);
+            navigate("/orders");
+          } else {
+            alert("Usuário ou senha inválidos.");
+          }
+        });
       })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    // teste de get all (funcionou)
-    // fetch("http://localhost:8080/users/all")
-    //   .then((response) => response.json())
-    //   .then((data) => console.log(data))
-    //   .catch((error) => console.log(error));
+      .catch((error) => console.log(error));
   };
 
   return (
