@@ -1,5 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
 import logo from "../../images/estrela.png";
+
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
@@ -8,10 +11,10 @@ export default function Home() {
   const [userInput, setUserInput] = React.useState("");
   const [passwordInput, setPasswordInput] = React.useState("");
 
+  const navigate = useNavigate();
+
   const login = (event) => {
     event.preventDefault();
-    //testar envio do formulário
-    console.log("enviou");
 
     // criar método post
     const options = {
@@ -22,20 +25,17 @@ export default function Home() {
 
     fetch("http://localhost:8080/users/login", options)
       .then((response) => {
-        response.json();
+        response.json().then((data) => {
+          if (data.token) {
+            console.log(data);
+            localStorage.setItem("token", data.token);
+            navigate("/orders");
+          } else {
+            alert("Usuário ou senha inválidos.");
+          }
+        });
       })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    // teste de get all (funcionou)
-    // fetch("http://localhost:8080/users/all")
-    //   .then((response) => response.json())
-    //   .then((data) => console.log(data))
-    //   .catch((error) => console.log(error));
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -67,11 +67,11 @@ export default function Home() {
           <Form.Group className="from-group mb-3" controlId="formGroupPassword">
             <Form.Label>Senha</Form.Label>
             <Form.Control
-            // type="password"
-            // value={passwordInput}
-            //onChange={(event) => {
-            // setPasswordInput(event.target.value);
-            // }}
+              type="password"
+              value={passwordInput}
+              onChange={(event) => {
+                setPasswordInput(event.target.value);
+              }}
             />
           </Form.Group>
           <div className="d-flex justify-content-center">
