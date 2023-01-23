@@ -24,9 +24,15 @@ export default function Header() {
             <Nav.Link>Página inicial</Nav.Link>
           </LinkContainer>
           <LinkContainer to="/orders">
-            <Nav.Link>Pedidos</Nav.Link>
+            <Nav.Link>Clientes</Nav.Link>
+          </LinkContainer>
+          <LinkContainer to="/dashboard">
+            <Nav.Link>Dashboard</Nav.Link>
           </LinkContainer>
         </Nav>
+        <LinkContainer to="/">
+          <Nav.Link>Log out</Nav.Link>
+        </LinkContainer>
       </Container>
     </Navbar>
   );

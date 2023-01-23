@@ -29,7 +29,7 @@ export default function Home() {
           if (data.token) {
             console.log(data);
             localStorage.setItem("token", data.token);
-            navigate("/orders");
+            navigate("/clients");
           } else {
             alert("Usuário ou senha inválidos.");
           }
@@ -39,8 +39,8 @@ export default function Home() {
   };
 
   return (
-    <div>
-      <div className="logo-container d-flex flex-column align-items-center my-5">
+    <div className="d-flex flex-column align-items-center">
+      <div className="logo-container d-flex flex-column align-items-center mt-3">
         <img
           src={logo}
           className="star-image-logo my-3"
@@ -48,7 +48,10 @@ export default function Home() {
         />
         <h1>CRM STARS</h1>
       </div>
-      <div className="login-container d-flex flex-column justify-content-center align-items-center">
+      <div
+        className="login-container d-flex flex-column justify-content-center align-items-center border rounded shadow-sm"
+        style={{ height: "350px", width: "400px" }}
+      >
         <div>
           <p className="text-center mb-4 fs-4">Login</p>
         </div>
