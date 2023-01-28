@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import Form from "react-bootstrap/Form";
 
-export default function ClientsList() {
+export default function ClientsList({}) {
   const [clientsData, setClientsData] = useState([]);
   const [showAmountSpent, setShowAmountSpent] = useState("");
   const [newAmountSpent, setNewAmountSpent] = useState("");
@@ -15,7 +15,7 @@ export default function ClientsList() {
         });
       })
       .catch((error) => console.log(error));
-  }, [showAmountSpent]);
+  });
 
   function updateAmountSpent(clientName, newAmountSpent) {
     const options = {
@@ -29,17 +29,26 @@ export default function ClientsList() {
 
     fetch("http://localhost:8080/users/updateAmountSpent", options)
       .then((response) => {
-        response
-          .json()
-          .then((data) => {
-            console.log(data);
-          })
-          .then(() => {
-            setShowAmountSpent("");
-            setNewAmountSpent("");
-          });
+        response.json().then(() => {
+          setShowAmountSpent("");
+          setNewAmountSpent("");
+        });
       })
       .catch((error) => console.log(error));
+  }
+
+  function deleteClient(clientName) {
+    const options = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: clientName,
+      }),
+    };
+
+    fetch("http://localhost:8080/users/deleteClient", options).catch((error) =>
+      console.log(error)
+    );
   }
 
   return (
@@ -71,7 +80,6 @@ export default function ClientsList() {
                           type="number"
                           placeholder="00"
                           style={{ height: "25px" }}
-                          value={newAmountSpent}
                           onChange={(event) => {
                             setNewAmountSpent(event.target.value);
                           }}
@@ -114,6 +122,16 @@ export default function ClientsList() {
                       src="pencil.png"
                       style={{ width: "15px" }}
                       alt="edit button"
+                    ></img>
+                  </button>
+                  <button
+                    onClick={() => deleteClient(client.name)}
+                    style={{ border: "none", background: "none" }}
+                  >
+                    <img
+                      src="delete.png"
+                      style={{ width: "15px" }}
+                      alt="delete client button"
                     ></img>
                   </button>
                 </td>

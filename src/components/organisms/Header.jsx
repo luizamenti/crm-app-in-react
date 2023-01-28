@@ -20,10 +20,7 @@ export default function Header() {
           <Navbar.Brand>CRM STARS</Navbar.Brand>
         </LinkContainer>
         <Nav className="me-auto">
-          <LinkContainer to="/">
-            <Nav.Link>Página inicial</Nav.Link>
-          </LinkContainer>
-          <LinkContainer to="/orders">
+          <LinkContainer to="/clients">
             <Nav.Link>Clientes</Nav.Link>
           </LinkContainer>
           <LinkContainer to="/dashboard">
